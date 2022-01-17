@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "english-cards",
+    "slug": "english-cards",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "english-cards"
+}
