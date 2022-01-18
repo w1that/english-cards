@@ -1,8 +1,17 @@
-import React from 'react'
-import { Button, Keyboard, Modal, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
-import Icon  from 'react-native-vector-icons/AntDesign';
+import React from "react";
+import {
+  Keyboard,
+  Modal,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
+import Icon from "react-native-vector-icons/AntDesign";
 
-export default function SignupPopup({signupVisible, setSignupVisible}) {
+export default function SignupPopup({ signupVisible, setSignupVisible }) {
   const styles = StyleSheet.create({
     container: {
       width: "90%",
@@ -41,55 +50,49 @@ export default function SignupPopup({signupVisible, setSignupVisible}) {
       fontSize: 16,
       borderRadius: 10,
     },
+    innerContainer: {
+      width: "100%",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    bottomButtonsContainer: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      width: "80%",
+    },
+    signupText: {
+      color: "white",
+      fontWeight: "bold",
+      fontSize: 16,
+      fontFamily: "monospace",
+    },
   });
-    return (
-        <Modal
-        animationType="slide"
-        transparent={true}
-        visible={signupVisible}
-      >
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+  return (
+    <Modal animationType="slide" transparent={true} visible={signupVisible}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <Text style={{ fontSize: 30 }}>SIGNUP</Text>
-          <View
-            style={{
-              width: "100%",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+          <View style={styles.innerContainer}>
             <TextInput style={styles.input} placeholder="username" />
             <TextInput style={styles.input} placeholder="email" />
             <TextInput style={styles.input} placeholder="password" />
             <TextInput style={styles.input} placeholder="password again" />
           </View>
 
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "80%",
-            }}
-          >
-            <TouchableOpacity onPress={()=>setSignupVisible(false)} style={styles.closeButton}>
+          <View style={styles.bottomButtonsContainer}>
+            <TouchableOpacity
+              onPress={() => setSignupVisible(false)}
+              style={styles.closeButton}
+            >
               <Icon color={"red"} size={30} name="close" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.signinButton}>
-              <Text
-                style={{
-                  color: "white",
-                  fontWeight: "bold",
-                  fontSize: 16,
-                  fontFamily: "monospace",
-                }}
-              >
-                Sign Up
-              </Text>
+              <Text style={styles.signupText}>Sign Up</Text>
             </TouchableOpacity>
           </View>
         </View>
       </TouchableWithoutFeedback>
-      </Modal>
-    )
+    </Modal>
+  );
 }

@@ -9,11 +9,22 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { useSelector } from "react-redux";
 
 export default function BottomNavigationBar() {
+  const theme = useSelector((state) => state.theme.darkTheme);
+
+  
+
+
+  const screen = useSelector(state => state.screen.currentScreen);
+
+  if(screen==='Welcome'){
+    return <></>
+  }
+
   const styles = StyleSheet.create({
     container: {
       height: 70,
       width: "100%",
-      backgroundColor: "#e6e6e6",
+      backgroundColor: theme?"#e6e6e6":'#1F1D36',
       position: "absolute",
       display: "flex",
       flexDirection: "row",
@@ -25,7 +36,7 @@ export default function BottomNavigationBar() {
       width: 70,
       height: 70,
       borderRadius: 50,
-      backgroundColor: "#f0f0f0",
+      backgroundColor: theme?"#f0f0f0":'#3F3351',
       position: "absolute",
       top: -35,
       flex: 1,
@@ -55,17 +66,10 @@ export default function BottomNavigationBar() {
     },
   });
 
-
-  const screen = useSelector(state => state.screen.currentScreen);
-
-  if(screen==='Welcome'){
-    return <></>
-  }
-
   return (
     <View style={styles.container}>
       <TouchableOpacity activeOpacity={0.7} style={styles.middleButton}>
-        <Icon name="add" size={60} color={"#000"} />
+        <Icon name="add" size={60} color={theme?"#000":'white'} />
       </TouchableOpacity>
       <TouchableOpacity style={styles.myWordsButton} activeOpacity={0.7}>
         <Icon name="bookmarks-outline" size={40} color={"#ff8b00"} />

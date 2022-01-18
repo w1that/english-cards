@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { Provider, useDispatch } from "react-redux";
 import BottomNavigationBar from "./components/BottomNavigationBar";
+import TopBar from "./components/TopBar";
 import HomeScreen from "./screens/HomeScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import { setCurrentUser } from "./slices/userSlice";
@@ -25,6 +26,7 @@ export default function App() {
         </Stack.Navigator>
       </NavigationContainer>
       <BottomNavigationBar />
+      <TopBar/>
     </View>
     </Provider>
   );

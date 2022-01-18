@@ -8,6 +8,20 @@ import { setCurrentScreen } from "../slices/screenRouteSlice";
 import { setCurrentUser } from "../slices/userSlice";
 
 export default function WelcomeScreen({ navigation}) {
+  
+  
+  const [signinVisible, setSigninVisible] = useState(false);
+  const [signupVisible, setSignupVisible] = useState(false);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setCurrentScreen('Welcome'));
+    setSigninVisible(false);
+    setSignupVisible(false);
+  }, [])
+
+
+  
   const styles = StyleSheet.create({
     container: {
       paddingTop: 20,
@@ -47,22 +61,36 @@ export default function WelcomeScreen({ navigation}) {
       justifyContent: "space-around",
       zIndex: 1,
     },
+    signupText:{
+      color: "white",
+      fontSize: 20,
+      fontWeight: "bold",
+      fontFamily: "monospace",
+    },
+    signinText:{
+      color: "white",
+      fontSize: 20,
+      fontWeight: "bold",
+      fontFamily: "monospace",
+    },
+    bubbleOne:{
+      width: 150,
+      height: 150,
+      backgroundColor: "#ffe0c9",
+      position: "absolute",
+      left: -75,
+      borderRadius: 100,
+    },
+    bubbleTwo:{
+      width: 300,
+      height: 300,
+      backgroundColor: "#c9e1ff",
+      position: "absolute",
+      right: -150,
+      borderRadius: 150,
+      bottom: 0,
+    }
   });
-  
-  const [signinVisible, setSigninVisible] = useState(false);
-  const [signupVisible, setSignupVisible] = useState(false);
-  const dispatch = useDispatch()
-  const currentUser = useSelector(state => state.user.currentUser);
-
-  useEffect(() => {
-    dispatch(setCurrentScreen('Welcome'));
-    dispatch(setCurrentUser({username:'', password:''}));
-    setSigninVisible(false);
-    setSignupVisible(false);
-  }, [])
-
-  
-
 
 
   return (
@@ -79,49 +107,24 @@ export default function WelcomeScreen({ navigation}) {
       <View style={styles.buttonsContainer}>
         <TouchableOpacity onPress={()=>setSignupVisible(true)} style={styles.signupButton} activeOpacity={0.7}>
           <Text
-            style={{
-              color: "white",
-              fontSize: 20,
-              fontWeight: "bold",
-              fontFamily: "monospace",
-            }}
+            style={styles.signupText}
           >
             Sign Up
           </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={()=>setSigninVisible(true)} style={styles.signinButton} activeOpacity={0.7}>
           <Text
-            style={{
-              color: "white",
-              fontSize: 20,
-              fontWeight: "bold",
-              fontFamily: "monospace",
-            }}
+            style={styles.signinText}
           >
             Sign In
           </Text>
         </TouchableOpacity>
       </View>
       <View
-        style={{
-          width: 150,
-          height: 150,
-          backgroundColor: "#ffe0c9",
-          position: "absolute",
-          left: -75,
-          borderRadius: 100,
-        }}
+        style={styles.bubbleOne}
       />
       <View
-        style={{
-          width: 300,
-          height: 300,
-          backgroundColor: "#c9e1ff",
-          position: "absolute",
-          right: -150,
-          borderRadius: 150,
-          bottom: 0,
-        }}
+        style={styles.bubbleTwo}
       />
     </View>
   );
