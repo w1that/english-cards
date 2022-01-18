@@ -1,13 +1,12 @@
 import { useRoute } from "@react-navigation/native";
 import React from "react";
 import {
-  Button,
-  Pressable,
   StyleSheet,
   TouchableOpacity,
   View,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import { useSelector } from "react-redux";
 
 export default function BottomNavigationBar() {
   const styles = StyleSheet.create({
@@ -55,6 +54,13 @@ export default function BottomNavigationBar() {
       right: "10%",
     },
   });
+
+
+  const screen = useSelector(state => state.screen.currentScreen);
+
+  if(screen==='Welcome'){
+    return <></>
+  }
 
   return (
     <View style={styles.container}>

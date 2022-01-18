@@ -1,9 +1,13 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { current } from "@reduxjs/toolkit";
+import React, { useEffect, useState } from "react";
+import { BackHandler, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import SigninPopup from "../components/SigninPopup";
 import SignupPopup from "../components/SignupPopup";
+import { setCurrentScreen } from "../slices/screenRouteSlice";
+import { setCurrentUser } from "../slices/userSlice";
 
-export default function WelcomeScreen() {
+export default function WelcomeScreen({ navigation}) {
   const styles = StyleSheet.create({
     container: {
       paddingTop: 20,
@@ -47,10 +51,23 @@ export default function WelcomeScreen() {
   
   const [signinVisible, setSigninVisible] = useState(false);
   const [signupVisible, setSignupVisible] = useState(false);
+  const dispatch = useDispatch()
+  const currentUser = useSelector(state => state.user.currentUser);
+
+  useEffect(() => {
+    dispatch(setCurrentScreen('Welcome'));
+    dispatch(setCurrentUser({username:'', password:''}));
+    setSigninVisible(false);
+    setSignupVisible(false);
+  }, [])
+
+  
+
+
 
   return (
     <View style={styles.container}>
-        <SigninPopup setSigninVisible={setSigninVisible} signinVisible={signinVisible}/>
+        <SigninPopup navigation={navigation} setSigninVisible={setSigninVisible} signinVisible={signinVisible}/>
         <SignupPopup setSignupVisible={setSignupVisible} signupVisible={signupVisible}/>
       <View style={{ zIndex: 1 }}>
         <Text style={styles.welcomeMessage1}>Welcome to Word Cards!</Text>
