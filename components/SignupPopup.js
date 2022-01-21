@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Keyboard,
   Modal,
@@ -10,8 +10,22 @@ import {
   View,
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default function SignupPopup({ signupVisible, setSignupVisible }) {
+  const [password, setpassword] = useState("");
+  const [passwordAgain, setpasswordAgain] = useState("");
+  const [email, setemail] = useState("");
+  const [username, setusername] = useState("");
+
+  const handleSignUp = () => {
+    createUserWithEmailAndPassword(getAuth(), email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+      })
+      .catch((err) => alert(err.message));
+  };
+
   const styles = StyleSheet.create({
     container: {
       width: "90%",
@@ -74,10 +88,26 @@ export default function SignupPopup({ signupVisible, setSignupVisible }) {
         <View style={styles.container}>
           <Text style={{ fontSize: 30 }}>SIGNUP</Text>
           <View style={styles.innerContainer}>
-            <TextInput style={styles.input} placeholder="username" />
-            <TextInput style={styles.input} placeholder="email" />
-            <TextInput style={styles.input} placeholder="password" />
-            <TextInput style={styles.input} placeholder="password again" />
+            <TextInput
+              onChangeText={(text) => setusername(text)}
+              style={styles.input}
+              placeholder="username"
+            />
+            <TextInput
+              onChangeText={(text) => setemail(text)}
+              style={styles.input}
+              placeholder="email"
+            />
+            <TextInput
+              onChangeText={(text) => setpassword(text)}
+              style={styles.input}
+              placeholder="password"
+            />
+            <TextInput
+              onChangeText={(text) => setpasswordAgain(text)}
+              style={styles.input}
+              placeholder="password again"
+            />
           </View>
 
           <View style={styles.bottomButtonsContainer}>
@@ -87,7 +117,10 @@ export default function SignupPopup({ signupVisible, setSignupVisible }) {
             >
               <Icon color={"red"} size={30} name="close" />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.signinButton}>
+            <TouchableOpacity
+              onPress={() => handleSignUp()}
+              style={styles.signinButton}
+            >
               <Text style={styles.signupText}>Sign Up</Text>
             </TouchableOpacity>
           </View>

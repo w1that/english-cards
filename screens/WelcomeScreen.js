@@ -14,11 +14,11 @@ export default function WelcomeScreen({ navigation}) {
   const [signupVisible, setSignupVisible] = useState(false);
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(setCurrentScreen('Welcome'));
-    setSigninVisible(false);
-    setSignupVisible(false);
-  }, [])
+  // useEffect(() => {
+  //   dispatch(setCurrentScreen('Welcome'));
+  //   setSigninVisible(false);
+  //   setSignupVisible(false);
+  // }, [])
 
 
   
@@ -91,6 +91,7 @@ export default function WelcomeScreen({ navigation}) {
       bottom: 0,
     }
   });
+
 
 
   return (

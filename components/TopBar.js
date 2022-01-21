@@ -16,7 +16,7 @@ export default function TopBar() {
 
   const styles = StyleSheet.create({
     container: {
-      backgroundColor: theme ? "#e9e9e9" : "#1F1D36",
+      backgroundColor: theme ? "#deddf0" : "#1F1D36",
       height: 70,
       width: "100%",
       position: "absolute",

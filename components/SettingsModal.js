@@ -88,7 +88,7 @@ export default function SettingsModal({ navigation }) {
             dispatch(setCurrentUser({ username: "", password: "" }));
             dispatch(setCurrentScreen('Welcome'));
             dispatch(toggleOptionsVisibility());
-            navigation.popToTop();
+            navigation.navigate('Welcome');
           }}
           activeOpacity={0.7}
           style={styles.logoutContainer}

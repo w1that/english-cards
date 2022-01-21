@@ -1,3 +1,4 @@
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import {
   View,
@@ -13,6 +14,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import { useDispatch} from "react-redux";
+import { setCurrentUser } from "../slices/userSlice";
 
 export default function SigninPopup({
   signinVisible,
@@ -25,36 +27,29 @@ export default function SigninPopup({
     { username: "u", password: "p" },
   ];
 
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [userExists, setUserExists] = useState(false);
   const dispatch = useDispatch();
 
   const handleSignIn = () => {
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].username === username && users[i].password === password) {
-        const currentUser = users[i];
-        // dispatch(setCurrentUser(currentUser));
-        setUserExists(true);
-        navigation.navigate("Home", { currentUser: currentUser });
-        setSigninVisible(false);
-        setUsername('');
-        setPassword('');
-        return
-      } 
-    }
-    Alert.alert(
-      "",
-      "Your username and password didn't match. Try again.",
-      [
-        { text: "OK" },
-      ]
-    );
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password).then(userCred=>{
+      const user = userCred.user;
+      alert('Welcome!')
+      dispatch(setCurrentUser({id:user.uid}))
+      setSigninVisible(false);
+      setPassword('')
+      setEmail('')
+      setPasswordVisible(false)
+      navigation.navigate('Home')
+    }).catch(err=>alert(err.message))
+
   };
 
   const styles = StyleSheet.create({
-    container: {
+    container: { 
       width: "90%",
       alignItems: "center",
       justifyContent: "space-between",
@@ -119,10 +114,11 @@ export default function SigninPopup({
           <Text style={{ fontSize: 30 }}>SIGNIN</Text>
           <View style={styles.innerContainer}>
             <TextInput
-              onChangeText={(text) => setUsername(text)}
-              value={username}
+            keyboardType="email-address"
+              onChangeText={(text) => setEmail(text)}
+              value={email}
               style={styles.input}
-              placeholder="username"
+              placeholder="email"
             />
             <TextInput
               secureTextEntry={passwordVisible ? false : true}
@@ -143,7 +139,7 @@ export default function SigninPopup({
             <TouchableOpacity
               onPress={() => {
                 setPassword(""), setPasswordVisible(false);
-                setUsername("");
+                setEmail("");
                 setSigninVisible(false);
               }}
               style={styles.closeButton}

@@ -10,8 +10,10 @@ import {
   View,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import BottomNavigationBar from "../components/BottomNavigationBar";
 import CreateCardField from "../components/CreateCardField";
 import SettingsModal from "../components/SettingsModal";
+import TopBar from "../components/TopBar";
 import { toggleOptionsVisibility } from "../slices/modalsSlice";
 import { setCurrentScreen } from "../slices/screenRouteSlice";
 import { setCurrentUser } from "../slices/userSlice";
@@ -22,35 +24,26 @@ export default function HomeScreen({ navigation, route }) {
   const theme = useSelector(state=>state.theme.darkTheme);
     const user = useSelector(state => state.user.currentUser);
 
-  useEffect(() => {
-    //when you are home and pressed to back button of the device, then it makes application exits.
-    BackHandler.addEventListener("hardwareBackPress", () =>
-      BackHandler.exitApp()
-    );
-
-    return () =>
-      BackHandler.removeEventListener("hardwareBackPress", () =>
-        BackHandler.exitApp()
-      );
-  }, []);
-
+ 
   useEffect(() => {
     dispatch(setCurrentScreen("Home"));
-    dispatch(setCurrentUser(route.params.currentUser));
   }, []);
 
   const styles = StyleSheet.create({
     container: {
       height: Dimensions.get("screen").height,
-      backgroundColor: theme?"#fff4f0":'#544179',
+      backgroundColor: theme?"#FFCBCB":'#544179',
       position: "relative",
       justifyContent:"center", 
-      alignItems:"center"
+      alignItems:"center",
+      flex:1
     },
   });
 
   return (
     <View style={styles.container}>
+      <BottomNavigationBar navigation={navigation} />
+      <TopBar/>
       <SettingsModal navigation={navigation} />
       <StatusBar hidden />
       <CreateCardField/>
