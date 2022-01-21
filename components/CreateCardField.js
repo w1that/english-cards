@@ -18,12 +18,13 @@ export default function CreateCardField() {
       justifyContent: "space-between",
       width: "60%",
       marginVertical: 10,
-      backgroundColor: theme?'#ffc2c2':"#7b5fb3",
+      backgroundColor: theme?'#fff':"#7b5fb3",
       borderWidth:1,
-      borderColor:theme?'#ffa6a6':'black',
+      borderColor:theme?'#e0e0e0':'black',
       paddingVertical: 10,
       paddingHorizontal: 20,
       borderRadius: 10,
+      zIndex:2
     },
     selectionTitle:{ fontSize: 20,color:theme?"black":'white' }
   });

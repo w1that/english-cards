@@ -23,7 +23,7 @@ export default function SettingsModal({ navigation }) {
 
   const styles = StyleSheet.create({
     container: {
-      backgroundColor: theme ? "#ffd1d1" : "#3F3351",
+      backgroundColor: theme ? "#F9E4C8" : "#3F3351",
       height: "80%",
       justifyContent: "center",
       alignItems: "center",

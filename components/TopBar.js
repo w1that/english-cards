@@ -25,6 +25,7 @@ export default function TopBar() {
       justifyContent: "space-between",
       alignItems: "center",
       flexDirection: "row",
+      zIndex:2
     },
     innerContainer: {
       flexDirection: "row",

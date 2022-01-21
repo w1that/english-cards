@@ -31,6 +31,8 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
     getSets();
   }, []);
 
+  
+
   function getSets() {
     setWordSets([]);
     const wordSetsRef = collection(db, "sets");
@@ -47,17 +49,16 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
     );
   }
 
-  const wait = (timeout) => {
-    return new Promise((resolve) => setTimeout(resolve, timeout));
-  };
-
   const theme = useSelector((state) => state.theme.darkTheme);
   const [refreshing, setRefreshing] = useState(false);
-
+  let wait
   const onRefresh = useCallback(() => {
     getSets();
     setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
+    wait = setTimeout(() => {
+      setRefreshing(false);
+      clearTimeout(wait);
+    }, 1000);
   }, []);
 
   function resetStates() {
@@ -65,6 +66,7 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
     setExample("");
     setWord("");
     setSelectedSet({ data:{title:''}, id:'' });
+    clearTimeout(wait);
   }
 
 
@@ -80,9 +82,15 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
     setExample('')
   }
 
+  useEffect(() => {
+    clearTimeout(wait);
+  }, [selectedSet]);
+
+  
   const styles = StyleSheet.create({
     mainContainer: { flex: 1, justifyContent: "center", alignItems: "center" },
     mainTitle: {
+      marginTop:30,
       fontSize: 20,
       borderBottomWidth: 1,
       paddingBottom: 10,
@@ -90,7 +98,7 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
       color: theme ? "black" : "white",
     },
     innerContainer: {
-      backgroundColor: theme ? "#e0e0e0" : "#3F3351",
+      backgroundColor: theme ? "#F8F5F1" : "#3F3351",
       width: "100%",
       height: "100%",
       padding: 10,
@@ -120,7 +128,9 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
     setButton: {
       width: "70%",
       margin: 10,
-      backgroundColor: theme ? "#E7FBBE" : "black",
+      backgroundColor: theme ? "white" : "black",
+      borderColor:theme?'#ff5959':'black',
+      borderWidth:1,
       borderRadius: 10,
       padding: 10,
       justifyContent: "center",
@@ -147,6 +157,7 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
     },
     selectAnotherText: {
       color: theme ? "black" : "white",
+      fontSize:16
     },
     addWordButton: {
       backgroundColor: theme ? "#9B0000" : "#9900ff",
@@ -158,6 +169,7 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
     addWordText: {
       color: theme ? "white" : "white",
       fontWeight: "bold", borderRadius:10,
+      fontSize:18
     },
     input: {
       borderWidth: 1,
@@ -167,6 +179,7 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
       borderRadius: 10,
       borderColor: theme ? "#bababa" : "#1f0033",
       color: "white",
+      fontSize:18
     },
   });
 
@@ -214,7 +227,7 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
                 <Text
                   style={{
                     color: theme ? "black" : "white",
-                    fontSize: 16,
+                    fontSize: 20,
                     marginBottom: 10,
                   }}
                 >

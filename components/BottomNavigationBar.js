@@ -26,6 +26,7 @@ export default function BottomNavigationBar({navigation}) {
       justifyContent: "center",
       alignItems: "center",
       bottom: 0,
+      zIndex:2
     },
     middleButton: {
       width: 70,
