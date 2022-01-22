@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore"
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyClgWCNhe18LpI7oAnYXgBPMmPC7wDh5ok",
@@ -12,5 +13,15 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
+
+export const getWords = (user, setSets) => {
+  const setsRef = collection(db, "sets");
+  const q = query(setsRef, where("userId", "==", user.id));
+  getDocs(q).then((res) => {
+    res.forEach((doc) => {
+      setSets((prev) => [...prev, { data: doc.data(), id: doc.id }]);
+    });
+  });
+};
 
 

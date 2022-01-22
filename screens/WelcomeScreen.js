@@ -1,27 +1,12 @@
-import { current } from "@reduxjs/toolkit";
-import React, { useEffect, useState } from "react";
-import { BackHandler, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import SigninPopup from "../components/SigninPopup";
 import SignupPopup from "../components/SignupPopup";
-import { setCurrentScreen } from "../slices/screenRouteSlice";
-import { setCurrentUser } from "../slices/userSlice";
 
-export default function WelcomeScreen({ navigation}) {
-  
-  
+export default function WelcomeScreen({ navigation }) {
   const [signinVisible, setSigninVisible] = useState(false);
   const [signupVisible, setSignupVisible] = useState(false);
-  const dispatch = useDispatch()
 
-  // useEffect(() => {
-  //   dispatch(setCurrentScreen('Welcome'));
-  //   setSigninVisible(false);
-  //   setSignupVisible(false);
-  // }, [])
-
-
-  
   const styles = StyleSheet.create({
     container: {
       paddingTop: 20,
@@ -61,19 +46,19 @@ export default function WelcomeScreen({ navigation}) {
       justifyContent: "space-around",
       zIndex: 1,
     },
-    signupText:{
+    signupText: {
       color: "white",
       fontSize: 20,
       fontWeight: "bold",
       fontFamily: "monospace",
     },
-    signinText:{
+    signinText: {
       color: "white",
       fontSize: 20,
       fontWeight: "bold",
       fontFamily: "monospace",
     },
-    bubbleOne:{
+    bubbleOne: {
       width: 150,
       height: 150,
       backgroundColor: "#ffe0c9",
@@ -81,7 +66,7 @@ export default function WelcomeScreen({ navigation}) {
       left: -75,
       borderRadius: 100,
     },
-    bubbleTwo:{
+    bubbleTwo: {
       width: 300,
       height: 300,
       backgroundColor: "#c9e1ff",
@@ -89,15 +74,20 @@ export default function WelcomeScreen({ navigation}) {
       right: -150,
       borderRadius: 150,
       bottom: 0,
-    }
+    },
   });
-
-
 
   return (
     <View style={styles.container}>
-        <SigninPopup navigation={navigation} setSigninVisible={setSigninVisible} signinVisible={signinVisible}/>
-        <SignupPopup setSignupVisible={setSignupVisible} signupVisible={signupVisible}/>
+      <SigninPopup
+        navigation={navigation}
+        setSigninVisible={setSigninVisible}
+        signinVisible={signinVisible}
+      />
+      <SignupPopup
+        setSignupVisible={setSignupVisible}
+        signupVisible={signupVisible}
+      />
       <View style={{ zIndex: 1 }}>
         <Text style={styles.welcomeMessage1}>Welcome to Word Cards!</Text>
         <Text style={styles.welcomeMessage2}>
@@ -106,27 +96,23 @@ export default function WelcomeScreen({ navigation}) {
         </Text>
       </View>
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity onPress={()=>setSignupVisible(true)} style={styles.signupButton} activeOpacity={0.7}>
-          <Text
-            style={styles.signupText}
-          >
-            Sign Up
-          </Text>
+        <TouchableOpacity
+          onPress={() => setSignupVisible(true)}
+          style={styles.signupButton}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.signupText}>Sign Up</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>setSigninVisible(true)} style={styles.signinButton} activeOpacity={0.7}>
-          <Text
-            style={styles.signinText}
-          >
-            Sign In
-          </Text>
+        <TouchableOpacity
+          onPress={() => setSigninVisible(true)}
+          style={styles.signinButton}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.signinText}>Sign In</Text>
         </TouchableOpacity>
       </View>
-      <View
-        style={styles.bubbleOne}
-      />
-      <View
-        style={styles.bubbleTwo}
-      />
+      <View style={styles.bubbleOne} />
+      <View style={styles.bubbleTwo} />
     </View>
   );
 }

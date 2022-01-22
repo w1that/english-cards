@@ -76,10 +76,12 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
       definition:definition,
       example:example,
       setId:selectedSet.id
-    }).then(res=>console.log(res))
-    setWord('')
-    setDefinition('')
-    setExample('')
+    }).then(()=>{
+      setWord('')
+      setDefinition('')
+      setExample('')
+    })
+    
   }
 
   useEffect(() => {
@@ -119,7 +121,6 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
     },
     setsContainer: {
       justifyContent: "center",
-      flex: 1,
       alignItems: "center",
       flexDirection: "row",
       flexWrap: "wrap",
@@ -132,7 +133,7 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
       borderColor:theme?'#ff5959':'black',
       borderWidth:1,
       borderRadius: 10,
-      padding: 10,
+      padding: 8,
       justifyContent: "center",
       alignItems: "center",
     },
@@ -195,6 +196,7 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
           <Text style={styles.mainTitle}>Add Word to an Existing Set</Text>
           {selectedSet.data.title.length === 0 ? (
             <ScrollView
+            scrollEnabled
               refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
               }

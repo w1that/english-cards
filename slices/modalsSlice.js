@@ -6,7 +6,7 @@ export const modalsSlice= createSlice({
     name:'modals',
     initialState,
     reducers:{
-        toggleOptionsVisibility:(state,action)=>{
+        toggleOptionsVisibility:(state)=>{
             state.optionsVisible = !state.optionsVisible;
         }
     }

@@ -20,7 +20,7 @@ export default function App() {
     <Provider store={store}>
       <View style={{ flex: 1 }}>
       <NavigationContainer >
-        <Stack.Navigator initialRouteName="Home" screenOptions={{headerShown:false}}>
+        <Stack.Navigator initialRouteName="Welcome" screenOptions={{headerShown:false}}>
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Discover" component={DiscoverScreen} />
