@@ -58,7 +58,7 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
     wait = setTimeout(() => {
       setRefreshing(false);
       clearTimeout(wait);
-    }, 1000);
+    }, 2000);
   }, []);
 
   function resetStates() {
@@ -85,7 +85,7 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
   }
 
   useEffect(() => {
-    clearTimeout(wait);
+    // clearTimeout(wait);
   }, [selectedSet]);
 
   

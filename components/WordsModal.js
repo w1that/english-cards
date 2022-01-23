@@ -129,11 +129,11 @@ export default function WordsModal({
             return (
               <View key={word.id} style={styles.wordCardContainer}>
                 <TouchableOpacity
-                  onPress={() => {
-                    setTimeout(() => {
-                      setFront((prev) => !prev);
-                    }, 100);
-                  }}
+                  // onPress={() => {
+                  //   setTimeout(() => {
+                  //     setFront((prev) => !prev);
+                  //   }, 100);
+                  // }}
                   activeOpacity={0.7}
                   style={styles.wordCardInnerContainer}
                 >

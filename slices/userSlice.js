@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState={currentUser:{id:''}}
+const initialState={currentUser:{id:'CEoMZcSsumgB2piOCJwzviFoEjz2'}}
 /**CEoMZcSsumgB2piOCJwzviFoEjz2 */
 export const userSlice = createSlice({
     name:'user',
