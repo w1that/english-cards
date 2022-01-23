@@ -11,17 +11,19 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Setting a timer']);
 
 export default function SignupPopup({ signupVisible, setSignupVisible }) {
   const [password, setpassword] = useState("");
-  const [passwordAgain, setpasswordAgain] = useState("");
   const [email, setemail] = useState("");
-  const [username, setusername] = useState("");
 
   const handleSignUp = () => {
     createUserWithEmailAndPassword(getAuth(), email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        alert("Signed up successfully. Welcome!")
+        setSignupVisible(false);
       })
       .catch((err) => alert(err.message));
   };
@@ -88,26 +90,28 @@ export default function SignupPopup({ signupVisible, setSignupVisible }) {
         <View style={styles.container}>
           <Text style={{ fontSize: 30 }}>SIGNUP</Text>
           <View style={styles.innerContainer}>
-            <TextInput
+            {/* <TextInput
               onChangeText={(text) => setusername(text)}
               style={styles.input}
               placeholder="username"
-            />
+            /> */}
             <TextInput
               onChangeText={(text) => setemail(text)}
               style={styles.input}
               placeholder="email"
+              keyboardType="email-address"
             />
             <TextInput
               onChangeText={(text) => setpassword(text)}
               style={styles.input}
               placeholder="password"
+              secureTextEntry
             />
-            <TextInput
+            {/* <TextInput
               onChangeText={(text) => setpasswordAgain(text)}
               style={styles.input}
               placeholder="password again"
-            />
+            /> */}
           </View>
 
           <View style={styles.bottomButtonsContainer}>

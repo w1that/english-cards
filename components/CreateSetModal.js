@@ -28,13 +28,15 @@ export default function CreateSetModal({
       height: "100%",
       padding: 10,
       position: "relative",
-      justifyContent:"space-around"
+      justifyContent:"space-evenly"
     },
     mainTitle: {
       fontSize: 20,
       borderBottomWidth: 1,
       paddingBottom: 10,
       marginBottom: 10,
+      textAlign:'center',
+      borderColor:theme?'#e0e0e0':'gray',
       color: theme ? "black" : "white",
     },exitButton: {
       justifyContent: "center",
@@ -50,7 +52,7 @@ export default function CreateSetModal({
       right: 0,
     },
     setButton: {
-      width: "70%",
+      width: "100%",
       margin: 10,
       backgroundColor: theme ? "white" : "black",
       borderColor:theme?'#ff5959':'black',

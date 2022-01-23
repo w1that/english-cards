@@ -13,9 +13,10 @@ export default function MyWordsScreen({ navigation }) {
   const [sets, setSets] = useState([]);
   const [selectedSetCardId, setSelectedSetCardId] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getWords(user, setSets);
+    getWords(user, setSets, setLoading);
   }, []);
 
   
@@ -25,11 +26,13 @@ export default function MyWordsScreen({ navigation }) {
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
+      backgroundColor:theme?'white':'#544179'
     },
     earlyReturnTextContainer: {
       borderRadius: 20,
       marginHorizontal:10,
-      backgroundColor: "#e0e0e0",
+      backgroundColor: theme?"white":'#544179',
+      color:theme?'black':'white',
       padding: 30,
       fontSize: 30,
     },
@@ -39,12 +42,18 @@ export default function MyWordsScreen({ navigation }) {
     },
   });
 
-  if (sets.length === 0) {
+  if (loading) {
+    
+    return <View style={{flex:1, justifyContent:"center", alignItems:"center",backgroundColor:theme?'white':'black'}}><Text style={{color:theme?'black':'white'}}>LOADING</Text></View>
+  }
+
+  if(sets.length===0 && loading===false){
     return (
       <View style={styles.earlyReturnContainer}>
         <TopBar/>
         <BottomNavigationBar navigation={navigation} />
-        <Text style={styles.earlyReturnTextContainer}>Here is empty. Create new word sets and come again!</Text>
+        <Text style={styles.earlyReturnTextContainer}>
+This place looks empty. Create new sets and start practicing!</Text>
       </View>
     );
   }
@@ -61,6 +70,7 @@ export default function MyWordsScreen({ navigation }) {
         {sets.map((set) => {
           return (
             <SetCard
+            key={set.id}
               setModalVisible={setModalVisible}
               setSelectedSetCardId={setSelectedSetCardId}
               title={set.data.title}

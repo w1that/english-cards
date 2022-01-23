@@ -27,11 +27,10 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
   const [wordSets, setWordSets] = useState([]);
   const [loading, setLoading] = useState(true);
 
+
   useEffect(() => {
     getSets();
   }, []);
-
-  
 
   function getSets() {
     setWordSets([]);
@@ -39,7 +38,7 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
     // const q = query(wordSetsRef, where("userId", "==", user.id));
     const q = query(
       wordSetsRef,
-      where("userId", "==", "CEoMZcSsumgB2piOCJwzviFoEjz2")
+      where("userId", "==", user.id)
     );
     getDocs(q).then((res) =>
       res.forEach((doc) => {
@@ -95,9 +94,12 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
       marginTop:30,
       fontSize: 20,
       borderBottomWidth: 1,
+      textAlign:'center',
+      borderColor:theme?'#e0e0e0':'gray',
+      color: theme ? "black" : "white",
       paddingBottom: 10,
       marginBottom: 10,
-      color: theme ? "black" : "white",
+      
     },
     innerContainer: {
       backgroundColor: theme ? "#F8F5F1" : "#3F3351",
@@ -105,6 +107,7 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
       height: "100%",
       padding: 10,
       position: "relative",
+      justifyContent:"space-evenly"
     },
     exitButton: {
       justifyContent: "center",
@@ -179,14 +182,15 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
       marginBottom: 10,
       borderRadius: 10,
       borderColor: theme ? "#bababa" : "#1f0033",
-      color: "white",
+      color: theme?"black":"white",
       fontSize:18
     },
   });
 
-  if(wordSets.length ===0){
-    return <></>
-  }
+  // if(wordSets.length ===0 && !loading){
+  //   alert('Create a set first!')
+  //   return <></>
+  // }
 
 
   return (
@@ -203,8 +207,8 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
               contentContainerStyle={styles.setsContainer}
             >
               {wordSets.map((wordSet) => {
-                return wordSets.length === 0 ? (
-                  <Text>Loading</Text>
+                return loading  ? (
+                  <Text>LOADING</Text>
                 ) : (
                   <TouchableOpacity
                     activeOpacity={0.7}

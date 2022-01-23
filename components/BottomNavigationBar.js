@@ -70,10 +70,10 @@ export default function BottomNavigationBar({navigation}) {
         <Icon name="add" size={60} color={theme?"#000":'white'} />
       </TouchableOpacity>
       <TouchableOpacity onPress={()=>navigation.navigate('MyWords')} style={styles.myWordsButton} activeOpacity={0.7}>
-        <Icon name="bookmarks-outline" size={40} color={"#ff8b00"} />
+        <Icon name="bookmarks-outline" size={40} color={theme?"#000":"#fff"} />
       </TouchableOpacity>
       <TouchableOpacity onPress={()=>navigation.navigate('Discover')} style={styles.exploreButton} activeOpacity={0.7}>
-        <Icon name="flash-outline" size={40} color={"#00b803"} />
+        <Icon name="flash-outline" size={40} color={theme?"#000":"#fff"} />
       </TouchableOpacity>
     </View>
   );

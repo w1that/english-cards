@@ -113,7 +113,7 @@ export default function WordsModal({
   if (loading) {
     return (
       <View style={styles.earlyReturnContainer}>
-        <Text style={styles.earlyReturnText}>Loading...</Text>
+        <Text style={styles.earlyReturnText}>LOADING</Text>
       </View>
     );
   }
@@ -129,11 +129,11 @@ export default function WordsModal({
             return (
               <View key={word.id} style={styles.wordCardContainer}>
                 <TouchableOpacity
-                  // onPress={() => {
-                  //   setTimeout(() => {
-                  //     setFront((prev) => !prev);
-                  //   }, 100);
-                  // }}
+                  onPress={() => {
+                    setTimeout(() => {
+                      setFront((prev) => !prev);
+                    }, 100);
+                  }}
                   activeOpacity={0.7}
                   style={styles.wordCardInnerContainer}
                 >

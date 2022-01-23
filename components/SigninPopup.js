@@ -15,6 +15,8 @@ import {
 import Icon from "react-native-vector-icons/AntDesign";
 import { useDispatch} from "react-redux";
 import { setCurrentUser } from "../slices/userSlice";
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Setting a timer']);
 
 export default function SigninPopup({
   signinVisible,
@@ -37,7 +39,6 @@ export default function SigninPopup({
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password).then(userCred=>{
       const user = userCred.user;
-      alert('Welcome!')
       dispatch(setCurrentUser({id:user.uid}))
       setSigninVisible(false);
       setPassword('')

@@ -24,7 +24,7 @@ export default function SettingsModal({ navigation }) {
   const styles = StyleSheet.create({
     container: {
       backgroundColor: theme ? "#F9E4C8" : "#3F3351",
-      height: "80%",
+      height: "100%",
       justifyContent: "center",
       alignItems: "center",
       position: "relative",
@@ -73,7 +73,7 @@ export default function SettingsModal({ navigation }) {
         </Pressable>
         <View style={styles.switchContainer}>
           <Text style={styles.currentThemeText}>
-            Current Theme: {theme ? "Light Theme" : "Dark Theme"}
+            Current Theme: {theme ? "Light" : "Dark"}
           </Text>
           <Switch
             trackColor={{ false: "black", true: "#81b0ff" }}
