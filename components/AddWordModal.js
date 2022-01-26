@@ -11,6 +11,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  KeyboardAvoidingView,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -83,15 +84,12 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
     
   }
 
-  useEffect(() => {
-    // clearTimeout(wait);
-  }, [selectedSet]);
 
   
   const styles = StyleSheet.create({
     mainContainer: { flex: 1, justifyContent: "center", alignItems: "center" },
     mainTitle: {
-      marginTop:30,
+      marginTop:50,
       fontSize: 20,
       borderBottomWidth: 1,
       textAlign:'center',
@@ -114,11 +112,11 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
       backgroundColor: theme ? "white" : "red",
       width: 50,
       height: 50,
-      borderTopLeftRadius: 10,
+      borderBottomLeftRadius: 10,
       alignItems: "center",
       alignSelf: "center",
       position: "absolute",
-      bottom: 0,
+      top: 0,
       backgroundColor:'#9B0000',
       right: 0,
     },
@@ -148,6 +146,8 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
       height: "90%",
     },
     buttonsContainer: {
+      position:"absolute",
+      bottom:0,
       justifyContent: "space-around",
       flexDirection: "row",
       width: "100%",
@@ -187,17 +187,13 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
     },
   });
 
-  // if(wordSets.length ===0 && !loading){
-  //   alert('Create a set first!')
-  //   return <></>
-  // }
+  
 
 
   return (
     <Modal animationType="slide" transparent={true} visible={addWordVisible}>
       <View style={styles.mainContainer}>
         <View style={styles.innerContainer}>
-          <Text style={styles.mainTitle}>Add Word to an Existing Set</Text>
           {selectedSet.data.title.length === 0 ? (
             <ScrollView
             scrollEnabled
@@ -206,9 +202,10 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
               }
               contentContainerStyle={styles.setsContainer}
             >
+              
               {wordSets.map((wordSet) => {
                 return loading  ? (
-                  <Text>LOADING</Text>
+                  <View style={{flex:1, justifyContent:"center", alignItems:"center",backgroundColor:theme?'white':'black'}}><Text style={{color:theme?'black':'white'}}>LOADING</Text></View>
                 ) : (
                   <TouchableOpacity
                     activeOpacity={0.7}
@@ -228,6 +225,8 @@ export default function AddWordModal({ addWordVisible, setAddWordVisible }) {
                   width: "100%",
                   height: "30%",
                   justifyContent: "center",
+                  position:"absolute",
+                   top:50
                 }}
               >
                 <Text

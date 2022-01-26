@@ -115,9 +115,7 @@ export default function DiscoverScreen({ navigation }) {
 
   if (loading) {
     return (
-      <View style={styles.loadingContainer}>
-        <Text>LOADING</Text>
-      </View>
+      <View style={{flex:1, justifyContent:"center", alignItems:"center",backgroundColor:theme?'white':'black'}}><Text style={{color:theme?'black':'white'}}>LOADING</Text></View>
     );
   }
 

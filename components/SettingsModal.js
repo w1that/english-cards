@@ -55,6 +55,7 @@ export default function SettingsModal({ navigation }) {
       backgroundColor: theme ? "white" : "black",
       padding: 8,
       borderRadius: 10,
+      marginTop:60
     },
     logoutText: { color: theme ? "black" : "white", fontSize: 16 },
     currentThemeText: { color: theme ? "black" : "white", fontSize: 22 },
